@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import { Card } from "react-native-paper";
+import { Spacer } from "../../../components/spacer/spacer.component";
 import styled from "styled-components/native";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
@@ -9,7 +10,7 @@ import open from "../../../../assets/open";
 export const RestaurantsInfoCard = ({ restaurant = {} }) => {
   const {
     name = "Some Restaurant",
-    icon,
+    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
     photos = [
       "https://www.foodiesfeed.com/wp-content/uploads/2019/06/top-view-for-box-of-2-burgers-home-made-600x899.jpg",
     ],
@@ -36,8 +37,12 @@ export const RestaurantsInfoCard = ({ restaurant = {} }) => {
             {isClosedTemporarily && (
               <CloseTemp variant="label">Closed Temporarily</CloseTemp>
             )}
-            <Gutter />
-            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            <Spacer position="left" size="medium">
+              {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+            </Spacer>
+            <Spacer position="left" size="medium">
+              <Image style={{ width: 15, height: 15 }} source={{ uri: icon }} />
+            </Spacer>
           </SectionEnd>
         </Section>
         <Address>{address}</Address>
@@ -93,8 +98,4 @@ const CloseTemp = styled(Text)`
   font-size: ${(props) => props.theme.fontSizes.title};
   font-weight: ${(props) => props.theme.fontWeights.bold};
   color: ${(props) => props.theme.colors.ui.error};
-`;
-
-const Gutter = styled(View)`
-  width: ${(props) => props.theme.space[3]};
 `;
