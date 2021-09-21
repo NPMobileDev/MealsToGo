@@ -19,26 +19,24 @@ export const RestaurantsScreen = () => {
           value={searchQuery}
         />
       </SearchContainer>
-      <RestaurantListContainer>
-        <RestaurantFlatList
-          data={[
-            { name: 1 },
-            { name: 2 },
-            { name: 3 },
-            { name: 4 },
-            { name: 5 },
-            { name: 6 },
-            { name: 7 },
-            { name: 8 },
-          ]}
-          renderItem={() => (
-            <Spacer position="bottom" size="large">
-              <RestaurantsInfoCard />
-            </Spacer>
-          )}
-          keyExtractor={(item) => item.name.toString()}
-        />
-      </RestaurantListContainer>
+      <RestaurantFlatList
+        data={[
+          { name: 1 },
+          { name: 2 },
+          { name: 3 },
+          { name: 4 },
+          { name: 5 },
+          { name: 6 },
+          { name: 7 },
+          { name: 8 },
+        ]}
+        renderItem={() => (
+          <Spacer position="bottom" size="large">
+            <RestaurantsInfoCard />
+          </Spacer>
+        )}
+        keyExtractor={(item) => item.name.toString()}
+      />
     </SafeArea>
   );
 };
@@ -51,12 +49,6 @@ const SafeArea = styled(SafeAreaView)`
 const SearchContainer = styled(View)`
   padding: ${(props) => props.theme.space[3]};
   justify-content: center;
-`;
-
-const RestaurantListContainer = styled(View)`
-  flex: 1;
-  padding: ${(props) => props.theme.space[3]};
-  justify-content: flex-start;
 `;
 
 const RestaurantFlatList = styled(FlatList).attrs({
