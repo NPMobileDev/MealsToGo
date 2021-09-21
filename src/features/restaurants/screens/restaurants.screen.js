@@ -20,7 +20,7 @@ export const RestaurantsScreen = () => {
         />
       </SearchContainer>
       <RestaurantListContainer>
-        <FlatList
+        <RestaurantFlatList
           data={[
             { name: 1 },
             { name: 2 },
@@ -37,8 +37,6 @@ export const RestaurantsScreen = () => {
             </Spacer>
           )}
           keyExtractor={(item) => item.name.toString()}
-          // eslint-disable-next-line react-native/no-inline-styles
-          contentContainerStyle={{ padding: 16 }}
         />
       </RestaurantListContainer>
     </SafeArea>
@@ -60,3 +58,9 @@ const RestaurantListContainer = styled(View)`
   padding: ${(props) => props.theme.space[3]};
   justify-content: flex-start;
 `;
+
+const RestaurantFlatList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
