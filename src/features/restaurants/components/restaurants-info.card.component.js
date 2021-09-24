@@ -15,7 +15,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
 
-export const RestaurantsInfoCard = ({ restaurant = {} }) => {
+export const RestaurantsInfoCard = ({ restaurant }) => {
   const {
     name = "Some Restaurant",
     icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
