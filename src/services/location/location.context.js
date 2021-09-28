@@ -10,7 +10,7 @@ export const LocationContextProvider = ({ children }) => {
   const [location, setLocation] = React.useState(null);
   const [keyword, setKeyword] = React.useState("san francisco");
 
-  const onSearch = (searchKeyword) => {
+  const onSearch = (searchKeyword = "san francisco") => {
     setIsLoading(true);
     setKeyword(searchKeyword);
     if (!searchKeyword.length) {
