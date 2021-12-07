@@ -4,57 +4,13 @@ import { ThemeProvider } from "styled-components/native";
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { theme } from "./src/infrastructure/theme/index";
-import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Ionicons } from "@expo/vector-icons";
+import { Navigation } from "./src/infrastructure/navigation/index";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-
-import { Text } from "react-native";
-import { SafeArea } from "./src/components/utilities/safe-area.component";
-
-const Tab = createBottomTabNavigator();
-
-const MapScreen = () => {
-  return (
-    <SafeArea>
-      <Text>Map!</Text>
-    </SafeArea>
-  );
-};
-
-const SettingsScreen = () => {
-  return (
-    <SafeArea>
-      <Text>Settings!</Text>
-    </SafeArea>
-  );
-};
-
-const getIcon = (iconOptions, focused, size, color) => {
-  return focused ? (
-    <Ionicons name={iconOptions.active} size={size} color={color} />
-  ) : (
-    <Ionicons name={iconOptions.inactive} size={size} color={color} />
-  );
-};
-
-const TAB_ICON_OPTIONS = {
-  Restaurant: { active: "restaurant", inactive: "restaurant-outline" },
-  Map: { active: "map", inactive: "map-outline" },
-  Settings: { active: "ios-settings", inactive: "ios-settings-outline" },
-};
-
-const createScreenOptions = ({ route }) => ({
-  tabBarIcon: ({ focused, size, color }) => {
-    const iconOptions = TAB_ICON_OPTIONS[route.name];
-    return getIcon(iconOptions, focused, size, color);
-  },
-});
 
 export default function App() {
   const [oswaldloaded] = useOswald({ Oswald_400Regular });
@@ -69,13 +25,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantContextProvider>
-            <NavigationContainer>
-              <Tab.Navigator screenOptions={createScreenOptions}>
-                <Tab.Screen name="Restaurant" component={RestaurantsScreen} />
-                <Tab.Screen name="Map" component={MapScreen} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
-              </Tab.Navigator>
-            </NavigationContainer>
+            <Navigation />
           </RestaurantContextProvider>
         </LocationContextProvider>
       </ThemeProvider>

@@ -7,8 +7,9 @@ import { Search } from "../../restaurants/components/search.component";
 import { RestaurantsInfoCard } from "../components/restaurants-info.card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import styled from "styled-components/native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export const RestaurantsScreen = () => {
+export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = React.useContext(RestaurantContext);
 
   return (
@@ -22,9 +23,13 @@ export const RestaurantsScreen = () => {
       <RestaurantFlatList
         data={restaurants}
         renderItem={({ item }) => (
-          <Spacer position="bottom" size="large">
-            <RestaurantsInfoCard restaurant={item} />
-          </Spacer>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("RestaurantDetail")}
+          >
+            <Spacer position="bottom" size="large">
+              <RestaurantsInfoCard restaurant={item} />
+            </Spacer>
+          </TouchableOpacity>
         )}
         keyExtractor={(item) => item.name}
       />
