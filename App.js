@@ -11,6 +11,7 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
+import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
 
 export default function App() {
   const [oswaldloaded] = useOswald({ Oswald_400Regular });
@@ -23,11 +24,13 @@ export default function App() {
   return (
     <React.Fragment>
       <ThemeProvider theme={theme}>
-        <LocationContextProvider>
-          <RestaurantContextProvider>
-            <Navigation />
-          </RestaurantContextProvider>
-        </LocationContextProvider>
+        <FavouritesContextProvider>
+          <LocationContextProvider>
+            <RestaurantContextProvider>
+              <Navigation />
+            </RestaurantContextProvider>
+          </LocationContextProvider>
+        </FavouritesContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </React.Fragment>

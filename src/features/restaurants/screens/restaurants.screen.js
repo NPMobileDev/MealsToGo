@@ -8,9 +8,13 @@ import { RestaurantsInfoCard } from "../components/restaurants-info.card.compone
 import { Spacer } from "../../../components/spacer/spacer.component";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { FavouritesContext } from "../../../services/favourites/favourites.context";
+import { FavouritesBar } from "../../../components/favourites/favourties-bar.component";
 
 export const RestaurantsScreen = ({ navigation }) => {
   const { restaurants, isLoading, error } = React.useContext(RestaurantContext);
+  const { favourites } = React.useContext(FavouritesContext);
+  const [isToggled, setIsToggled] = React.useState(false);
 
   return (
     <SafeArea>
@@ -19,7 +23,11 @@ export const RestaurantsScreen = ({ navigation }) => {
           <Loading size={50} animating={true} color={Colors.blue800} />
         </LoadingContainer>
       )}
-      <Search />
+      <Search
+        isFavouritesToggled={isToggled}
+        onFavouritesToggle={() => setIsToggled(!isToggled)}
+      />
+      {isToggled && <FavouritesBar />}
       <RestaurantFlatList
         data={restaurants}
         renderItem={({ item }) => (
