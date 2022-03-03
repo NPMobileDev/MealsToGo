@@ -20,6 +20,8 @@ const hint = (theme) => `
 
 const error = (theme) => `
     color: ${theme.colors.text.error};
+    font-weight: ${theme.fontWeights.medium};
+    font-size: ${theme.fontSizes.body};
 `;
 
 const caption = (theme) => `

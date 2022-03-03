@@ -1,6 +1,10 @@
 import React, { useState, createContext } from "react";
 import * as firebase from "firebase";
-import { loginRequest } from "./authentication.services";
+import {
+  loginRequest,
+  registerRequest,
+  logoutRequest,
+} from "./authentication.services";
 
 export const AuthenticationContext = createContext();
 
@@ -9,19 +13,45 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+
+  // listen to firebase user auth state changed
+  firebase.auth().onAuthStateChanged((usr) => {
+    if (usr) {
+      setUser(usr);
+      setIsAuthenticated(true);
+    } else {
+      setUser(null);
+      setIsAuthenticated(false);
+    }
+  });
   const onLogin = (email, password) => {
     setIsLoading(true);
     loginRequest(email, password)
-      .then((user) => {
+      .then((_) => {
         setIsLoading(false);
-        setUser(user);
-        setIsAuthenticated(true);
       })
       .catch((e) => {
         setIsLoading(false);
-        setIsAuthenticated(false);
         setError(e.toString());
       });
+  };
+  const onRegister = (email, password, repeatPassword) => {
+    if (password !== repeatPassword) {
+      setError("Error: Password do not match");
+      return;
+    }
+    setIsLoading(true);
+    registerRequest(email, password)
+      .then((_) => {
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setIsLoading(false);
+        setError(e.toString());
+      });
+  };
+  const onLogout = () => {
+    logoutRequest();
   };
   return (
     <AuthenticationContext.Provider
@@ -31,6 +61,8 @@ export const AuthenticationContextProvider = ({ children }) => {
         isAuthenticated,
         error,
         onLogin,
+        onRegister,
+        onLogout,
       }}
     >
       {children}
