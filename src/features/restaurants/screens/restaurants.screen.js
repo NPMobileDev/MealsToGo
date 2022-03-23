@@ -3,6 +3,7 @@ import { RestaurantContext } from "../../../services/restaurants/restaurants.con
 import { View } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { SafeArea } from "../../../components/utilities/safe-area.component";
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { Search } from "../../restaurants/components/search.component";
 import { RestaurantsInfoCard } from "../components/restaurants-info.card.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
@@ -34,16 +35,19 @@ export const RestaurantsScreen = ({ navigation }) => {
           onNavigate={navigation.navigate}
         />
       )}
+
       <RestaurantFlatList
         data={restaurants}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("RestaurantDetail", { restaurant: item })
             }
           >
             <Spacer position="bottom" size="large">
-              <RestaurantsInfoCard restaurant={item} />
+              <FadeInView delay={index * 0.7}>
+                <RestaurantsInfoCard restaurant={item} />
+              </FadeInView>
             </Spacer>
           </TouchableOpacity>
         )}
