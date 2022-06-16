@@ -1,10 +1,12 @@
 import camelize from "camelize";
-import { host } from "../../utils/env";
+import { host, isMock } from "../../utils/env";
 
 export const restaurantRequest = (location = "37.7749295,-122.4194155") => {
-  return fetch(`${host}/placesNearby?location=${location}`).then((res) => {
-    return res.json();
-  });
+  return fetch(`${host}/placesNearby?location=${location}&mock=${isMock}`).then(
+    (res) => {
+      return res.json();
+    }
+  );
 };
 
 export const restaurantTransform = ({ results = [] }) => {
