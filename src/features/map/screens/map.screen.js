@@ -6,12 +6,12 @@ import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
 import { MapCallout } from "../components/map-callout.component";
 
-const Map = styled(MapView)`
+const MapDrawer = styled(MapView)`
   height: 100%;
   width: 100%;
 `;
 
-export const MapScreen = ({ navigation }) => {
+const RestaurantMap = ({ navigation }) => {
   const { location } = useContext(LocationContext);
   const { restaurants = [] } = useContext(RestaurantContext);
 
@@ -22,14 +22,14 @@ export const MapScreen = ({ navigation }) => {
     const northeastLat = viewport.northeast.lat;
     const southwestLat = viewport.southwest.lat;
 
-    const latDelta = northeastLat - southwestLat;
-    setLatDelta(latDelta);
+    const latitudeDelta = northeastLat - southwestLat;
+    setLatDelta(latitudeDelta);
   }, [location, viewport]);
 
   return (
     <React.Fragment>
       <Search />
-      <Map
+      <MapDrawer
         region={{
           latitude: lat,
           longitude: lng,
@@ -57,7 +57,15 @@ export const MapScreen = ({ navigation }) => {
             </MapView.Marker>
           );
         })}
-      </Map>
+      </MapDrawer>
     </React.Fragment>
   );
+};
+
+export const MapScreen = ({ navigation }) => {
+  const { location } = useContext(LocationContext);
+  if (!location) {
+    return <MapDrawer region={{ latitude: 0, longitude: 0 }} />;
+  }
+  return <RestaurantMap navigation={navigation} />;
 };
