@@ -9,6 +9,7 @@ import {
   NameInput,
   PayButton,
   ClearButton,
+  PaymentProcessing,
 } from "../components/checkout.styles";
 import { CreditCardInput } from "../components/credit-card.component";
 import { RestaurantsInfoCard } from "../../restaurants/components/restaurants-info.card.component";
@@ -19,9 +20,23 @@ import { List } from "react-native-paper";
 export const CheckoutScreen = () => {
   const { cart, restaurant, sum, clearCart } = useContext(CartContext);
   const [name, setName] = useState("");
+  const [card, setCard] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onPay = () => {
-    payRequest("123", 123, "sss");
+    setIsLoading(true);
+    if (!card || !card.id) {
+      setIsLoading(false);
+      console.log("some error");
+      return;
+    }
+    payRequest(card.id, sum, name)
+      .then((result) => {
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+      });
   };
 
   if (!cart || !restaurant) {
@@ -37,6 +52,7 @@ export const CheckoutScreen = () => {
   return (
     <SafeArea>
       <RestaurantsInfoCard restaurant={restaurant} />
+      {isLoading && <PaymentProcessing />}
       <ScrollView>
         <Spacer position="left" size="medium">
           <Spacer position="top" size="large">
@@ -52,14 +68,24 @@ export const CheckoutScreen = () => {
         <NameInput
           label="Name"
           value={name}
-          onChangeText={(t) => (t.length ? setName(t) : setName(null))}
+          onChangeText={(t) => (t.length ? setName(t) : setName(""))}
         />
-        {name.length > 0 && <CreditCardInput />}
+        {name.length > 0 && <CreditCardInput name={name} onSuccess={setCard} />}
         <Spacer position="top" size="xl" />
-        <PayButton mode="contained" icon="cash-usd" onPress={() => onPay()}>
+        <PayButton
+          disabled={isLoading}
+          mode="contained"
+          icon="cash-usd"
+          onPress={() => onPay()}
+        >
           Pay
         </PayButton>
-        <ClearButton mode="contained" icon="cart-off" onPress={clearCart}>
+        <ClearButton
+          disabled={isLoading}
+          mode="contained"
+          icon="cart-off"
+          onPress={clearCart}
+        >
           Clear Cart
         </ClearButton>
       </ScrollView>
