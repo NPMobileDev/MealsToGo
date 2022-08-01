@@ -17,7 +17,7 @@ import { payRequest } from "../../../services/checkout/checkout.service";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { List } from "react-native-paper";
 
-export const CheckoutScreen = () => {
+export const CheckoutScreen = ({ navigation }) => {
   const { cart, restaurant, sum, clearCart } = useContext(CartContext);
   const [name, setName] = useState("");
   const [card, setCard] = useState(null);
@@ -28,14 +28,23 @@ export const CheckoutScreen = () => {
     if (!card || !card.id) {
       setIsLoading(false);
       console.log("some error");
+      navigation.navigate("CheckoutError", {
+        error: "Please fill in a valid credit card",
+      });
       return;
     }
     payRequest(card.id, sum, name)
       .then((result) => {
         setIsLoading(false);
+        clearCart();
+        setName("");
+        navigation.navigate("CheckoutSuccess");
       })
       .catch((err) => {
         setIsLoading(false);
+        navigation.navigate("CheckoutError", {
+          error: err,
+        });
       });
   };
 
@@ -44,7 +53,7 @@ export const CheckoutScreen = () => {
       <SafeArea>
         <CartContainer>
           <CartIcon icon="cart-off" />
-          <Typography variant="error">Empty cart</Typography>
+          <Typography variant="body">Your cart is empty!</Typography>
         </CartContainer>
       </SafeArea>
     );
@@ -70,7 +79,17 @@ export const CheckoutScreen = () => {
           value={name}
           onChangeText={(t) => (t.length ? setName(t) : setName(""))}
         />
-        {name.length > 0 && <CreditCardInput name={name} onSuccess={setCard} />}
+        {name.length > 0 && (
+          <CreditCardInput
+            name={name}
+            onSuccess={setCard}
+            onError={() =>
+              navigation.navigate("CheckoutError", {
+                error: "Something went wrong with your credit card!",
+              })
+            }
+          />
+        )}
         <Spacer position="top" size="xl" />
         <PayButton
           disabled={isLoading}

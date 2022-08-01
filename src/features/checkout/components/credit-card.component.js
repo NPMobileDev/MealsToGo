@@ -2,7 +2,7 @@ import React from "react";
 import { LiteCreditCardInput as LCCI } from "react-native-credit-card-input";
 import { cardTokenRequest } from "../../../services/checkout/checkout.service";
 
-export const CreditCardInput = ({ name, onSuccess }) => {
+export const CreditCardInput = ({ name, onSuccess, onError }) => {
   const onChange = async (formData) => {
     const { values, status } = formData;
     const isIncomplete = Object.values(status).includes("incomplete");
@@ -16,9 +16,13 @@ export const CreditCardInput = ({ name, onSuccess }) => {
       name: name,
     };
     if (!isIncomplete) {
-      const info = await cardTokenRequest(card);
-      console.log(info);
-      onSuccess(info);
+      try {
+        const info = await cardTokenRequest(card);
+        console.log(info);
+        onSuccess(info);
+      } catch (err) {
+        onError(err);
+      }
     }
   };
   return <LCCI onChange={onChange} />;
