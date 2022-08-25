@@ -4,12 +4,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { RestaurantNavigator } from "./restaurants.navigator";
 import { CheckoutNavigator } from "./checkout.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
-import { CheckoutScreen } from "../../features/checkout/screens/checkout.screen";
+// import { CheckoutScreen } from "../../features/checkout/screens/checkout.screen";
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import { RestaurantContextProvider } from "../../services/restaurants/restaurants.context";
 import { LocationContextProvider } from "../../services/location/location.context";
 import { SettingsNavigator } from "./settings.navigator";
 import { CartContextProvider } from "../../services/cart/cart.context";
+import { colors } from "../../infrastructure/theme/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +35,8 @@ const createScreenOptions = ({ route }) => ({
     return getIcon(iconOptions, focused, size, color);
   },
   headerShown: false,
+  tabBarActiveTintColor: colors.brand.primary,
+  tabBarInactiveTintColor: colors.brand.muted,
 });
 
 export const AppNavigator = () => {
