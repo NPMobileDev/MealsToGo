@@ -12,15 +12,21 @@ const CheckoutStack = createStackNavigator();
 
 export const CheckoutNavigator = () => {
   return (
-    <CheckoutStack.Navigator headerShown={false}>
+    <CheckoutStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <CheckoutStack.Screen name="Checkout" component={CheckoutScreen} />
       <CheckoutStack.Screen
         name="CheckoutSuccess"
         component={CheckoutSuccessScreen}
+        options={{ headerShown: true }}
       />
       <CheckoutStack.Screen
         name="CheckoutError"
         component={CheckoutErrorScreen}
+        options={{ headerShown: true }}
       />
     </CheckoutStack.Navigator>
   );

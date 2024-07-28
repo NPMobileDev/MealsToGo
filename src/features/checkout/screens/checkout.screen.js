@@ -94,7 +94,7 @@ export const CheckoutScreen = ({ navigation }) => {
         <PayButton
           disabled={isLoading}
           mode="contained"
-          icon="cash-usd"
+          icon="currency-usd"
           onPress={() => onPay()}
         >
           Pay
