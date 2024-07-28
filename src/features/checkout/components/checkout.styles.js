@@ -42,7 +42,7 @@ export const ClearButton = styled(Button).attrs({
 export const PaymentProcessing = styled(ActivityIndicator).attrs({
   size: 128,
   animating: true,
-  color: Colors.blue300,
+  color: "#0000FF",
 })`
   position: absolute;
   top: 50%;

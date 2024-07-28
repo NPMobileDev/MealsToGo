@@ -29,7 +29,7 @@ const SpacerView = styled(View)`
   ${({ variant }) => variant};
 `;
 
-export const Spacer = ({ position, size, children }) => {
+export const Spacer = ({ position = "top", size = "small", children }) => {
   const theme = useTheme();
 
   return (
@@ -39,7 +39,7 @@ export const Spacer = ({ position, size, children }) => {
   );
 };
 
-Spacer.defaultProps = {
-  position: "top",
-  size: "small",
-};
+// Spacer.defaultProps = {
+//   position: "top",
+//   size: "small",
+// };

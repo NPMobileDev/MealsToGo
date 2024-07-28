@@ -1,9 +1,24 @@
-import * as firebase from "firebase";
+import { getApp } from "firebase/app";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
-export const loginRequest = (email, password) =>
-  firebase.auth().signInWithEmailAndPassword(email, password);
+const getFirebaseApp = () => {
+  return getApp();
+};
 
-export const registerRequest = (email, password) =>
-  firebase.auth().createUserWithEmailAndPassword(email, password);
+const getFirebaseAuth = () => {
+  return getAuth(getFirebaseApp());
+};
 
-export const logoutRequest = () => firebase.auth().signOut();
+export const loginRequest = (email, password) => {
+  return signInWithEmailAndPassword(getFirebaseAuth(), email, password);
+};
+
+export const registerRequest = (email, password) => {
+  return createUserWithEmailAndPassword(getFirebaseAuth(), email, password);
+};
+
+export const logoutRequest = () => getFirebaseAuth().signOut();

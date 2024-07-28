@@ -1,5 +1,6 @@
 import React, { useState, createContext } from "react";
-import * as firebase from "firebase";
+import { getAuth } from "firebase/auth";
+import { getApp } from "firebase/app";
 import {
   loginRequest,
   registerRequest,
@@ -15,7 +16,8 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   // listen to firebase user auth state changed
-  firebase.auth().onAuthStateChanged((usr) => {
+  const auth = getAuth(getApp());
+  auth.onAuthStateChanged((usr) => {
     if (usr) {
       setUser(usr);
       setIsAuthenticated(true);

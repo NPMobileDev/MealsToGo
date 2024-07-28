@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Typography } from "../../../components/typography/typography.component";
 import { AuthenticationContext } from "../../../services/authentication/authentication.context";
-import { ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -57,7 +57,7 @@ export const LoginScreen = ({ navigation }) => {
               Login
             </AuthButton>
           ) : (
-            <ActivityIndicator animating={true} color={Colors.blue400} />
+            <ActivityIndicator animating={true} color="#0000FF" />
           )}
         </Spacer>
       </AccountContainer>

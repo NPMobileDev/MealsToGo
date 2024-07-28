@@ -48,10 +48,10 @@ const VariantText = styled.Text`
   ${({ variant, theme }) => variants[variant](theme)};
 `;
 
-export const Typography = ({ variant, children }) => {
+export const Typography = ({ variant = "body", children }) => {
   return <VariantText variant={variant}>{children}</VariantText>;
 };
 
-Typography.defaultProps = {
-  variant: "body",
-};
+// Typography.defaultProps = {
+//   variant: "body",
+// };

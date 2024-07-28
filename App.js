@@ -10,7 +10,8 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
-import * as firebase from "firebase";
+// import * as firebase from "firebase";
+import { initializeApp, getApps } from "firebase/app";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
 
 const firebaseConfig = {
@@ -22,8 +23,12 @@ const firebaseConfig = {
   appId: "1:1022513511911:web:96ac8eb2326212abc2d142",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+// if (!firebase.apps.length) {
+//   initializeApp(firebaseConfig);
+// }
+
+if (!getApps().length) {
+  initializeApp(firebaseConfig);
 }
 
 export default function App() {
