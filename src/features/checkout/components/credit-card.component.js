@@ -1,5 +1,8 @@
 import React from "react";
-import { LiteCreditCardInput as LCCI } from "react-native-credit-card-input";
+import {
+  // LiteCreditCardInput as LCCI,
+  CreditCardInput as CCI,
+} from "react-native-credit-card-input";
 import { cardTokenRequest } from "../../../services/checkout/checkout.service";
 
 export const CreditCardInput = ({ name, onSuccess, onError }) => {
@@ -25,5 +28,5 @@ export const CreditCardInput = ({ name, onSuccess, onError }) => {
       }
     }
   };
-  return <LCCI onChange={onChange} />;
+  return <CCI onChange={onChange} />;
 };
