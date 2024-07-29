@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { colors } from "../../../infrastructure/theme/colors";
 import { Button, TextInput } from "react-native-paper";
+import LottieView from "lottie-react-native";
 
 export const AccountBackground = styled.ImageBackground.attrs({
   source: require("../../../../assets/home_bg.jpeg"),
@@ -51,4 +52,9 @@ export const AnimationWrapper = styled.View`
   position: absolute;
   top: 30px;
   padding: ${(props) => props.theme.space[2]};
+`;
+
+export const LottieAnimation = styled(LottieView)`
+  width: 100%;
+  height: 100%;
 `;
