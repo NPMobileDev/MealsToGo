@@ -19,5 +19,6 @@ An app that is created while learning React Native.
 
 - Expo
 - React Native
+- Google geocode service(Restaurant information)
 - Firebase(Authentication)
 - Stripe(Payment system)
