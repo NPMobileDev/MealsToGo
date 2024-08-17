@@ -23,7 +23,7 @@ An app that is created while learning React Native.
 - Firebase(Authentication)
 - Stripe(Payment system)
 
-# Services
+# Third party services
 
 ---
 
@@ -35,3 +35,33 @@ An app that is created while learning React Native.
   https://firebaseopensource.com/projects/firebase/firebase-tools/#installation
 - Google geocode api: looking up geocode for certain place.
 - Google place api: find places around certain geocode.
+
+## Run firebase emulator locally
+
+---
+
+**Required a project to be opened on Firebase**
+
+- Install [Firebase CLI](https://firebaseopensource.com/projects/firebase/firebase-tools/#installation)
+- `firebase login` to login to your fiebase account
+- Change **default** value with your firebase project ID in `.firebaserc`
+- **To set environment key/value**: google & strip service required api key
+  to consume service. add api key for google and stripe for example:
+  `firebase functions:config:set google.key=[google service api key]` and
+  `firebase functions:config:set stripe.key=[stripe service api key]`. By
+  this way cloud function is able to communicate with google and stripe service
+  with api key
+- `cd functions`
+- `firebase functions:config:get > .runtimeconfig.json` export environment key/value
+  to file
+- `cd ..`
+- `firebase init emulators` follow instruction with default value
+- `firebase emulators:start --only functions` to start emulators
+- Now you can consume cloud function service and all clould function
+  source code are located under functions folder
+
+# Run app in emulator
+
+---
+
+- `npm run [ios/android]`
