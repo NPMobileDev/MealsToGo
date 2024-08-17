@@ -29,6 +29,7 @@ An app that is created while learning React Native.
 
 - Firebase: cloud functions for app to consume and make request
   to google geocode & place api. Look into functions folder.
+  And for account sign up and sign in.
 - Firebase CLI: firebase commandline tool for setup firebase project and
   develop clould functions
   https://firebaseopensource.com/projects/firebase/firebase-tools/#installation
