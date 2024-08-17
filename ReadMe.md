@@ -66,5 +66,19 @@ accordingly
 # Run app in emulator
 
 ---
+- create an json file name `firebase.config.json` at root directory and fill the
+following form and fill values according to your firebase console app.
+`
+{
+  "apiKey": "",
+  "authDomain": "",
+  "projectId": "",
+  "storageBucket": "",
+  "messagingSenderId": "",
+  "appId": ""
+}
+`
+values can be created in firebase console under project setting -> General
+-> your apps. If no app available create a new one.
 
 - `npm run [ios/android]`
