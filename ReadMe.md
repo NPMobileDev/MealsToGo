@@ -60,6 +60,9 @@ An app that is created while learning React Native.
 - Now you can consume cloud function service and all clould function
   source code are located under functions folder
 
+**Note**: You will need to change **liveHost** and **localHost** in `src/utils/env.js`
+accordingly
+
 # Run app in emulator
 
 ---
