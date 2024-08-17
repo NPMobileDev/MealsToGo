@@ -12,6 +12,7 @@ web-build/
 .runtimeconfig.json
 package-lock.json
 yarn.lock
+dist
 
 # macOS
 .DS_Store
